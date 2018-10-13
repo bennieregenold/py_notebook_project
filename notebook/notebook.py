@@ -37,13 +37,17 @@ class Notebook:
     def _find_note(self, note_id):
         '''Locate the note with a give id'''
         for note in self.notes:
-            if note.id == note_id:
+            if str(note.id) == str(note_id):
                 return note
         return None
 
     def modify_memo(self, note_id, memo):
         '''Find the note with an id and change its memo.'''
-        self._find_note(note_id).memo = memo
+        note = self._find_note(note_id)
+        if note:
+            note.memo = memo
+            return True
+        return False
 
     def modify_tags(self, note_id, tags):
         '''Find the note with given id and change its tags.'''
